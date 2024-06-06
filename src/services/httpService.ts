@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
+import axios, { AxiosResponse, AxiosError } from "axios";
 
 const https = require("https");
 const agent = new https.Agent({
@@ -9,8 +9,6 @@ const app = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
 });
-
-console.log(process.env.NEXT_PUBLIC_API_BASE_URL);
 
 app.interceptors.request.use(
   (config) => {

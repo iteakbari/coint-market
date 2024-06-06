@@ -48,12 +48,11 @@ function CompeleteProfile({ register, isValid, handleSubmit, errors, onSubmit }:
         <>
             <p className='font-semibold my-7 text-center'>Create Account</p>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className='flex gap-5 flex-wrap'>
+                <div className='grid gap-5 grid-cols-2'>
                     <InputText
                         type='text'
                         placeholder='Name'
                         className='h-12 '
-                        containerClass='w-[48%]'
                         errors={errors?.name}
                         formObject={register('name', { required: 'Name is required' })}
                     />
@@ -61,7 +60,6 @@ function CompeleteProfile({ register, isValid, handleSubmit, errors, onSubmit }:
                         type='password'
                         placeholder='Password'
                         className='h-12'
-                        containerClass='w-[48%]'
                         errors={errors?.password}
                         formObject={register('password', {
                             required: 'Password is required', validate: validatePassword
@@ -70,7 +68,6 @@ function CompeleteProfile({ register, isValid, handleSubmit, errors, onSubmit }:
                     <InputText
                         type='date'
                         className='h-12 '
-                        containerClass='w-[48%]'
                         errors={errors?.birth}
                         formObject={register('birth', { required: 'BirthDate is required' })}
                     />
@@ -78,7 +75,6 @@ function CompeleteProfile({ register, isValid, handleSubmit, errors, onSubmit }:
                     <SelectBox
                         className='h-12'
                         errors={errors?.gender}
-                        containerClass='w-[48%]'
                         options={[
                             { id: 1, title: 'male' },
                             { id: 2, title: 'female' }

@@ -1,7 +1,7 @@
 "use client"
 import React, { FormEvent, useEffect, useState } from 'react'
 import { useMutation } from 'react-query';
-import { compeleteProfile, confirmEmail, getEmail, setPassword } from '@/services/registerServeice';
+import { checkEmail, compeleteProfile, confirmEmail, getEmail, setPassword } from '@/services/registerServeice';
 import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import GetEmail from '@/components/Sign/GetEmail';
@@ -9,6 +9,7 @@ import ConfirmEmail from '@/components/Sign/ConfirmEmail';
 import Link from 'next/link';
 import Image from 'next/image';
 import SetPassword from '@/components/Sign/SetPassword';
+import { useRouter } from 'next/navigation';
 
 type FormData = {
     email: string;
@@ -23,14 +24,16 @@ function ForgetPassword() {
     const [step, setStep] = useState(1);
     const [otp, setOtp] = useState('');
     const [signInfo, setSignInfo] = useState({ guid: "", secorityCode: "" });
-    const { register, handleSubmit, watch, clearErrors, setError, setValue, formState: { errors, isValid } } = useForm<FormData>({
+    const { register, handleSubmit, watch, clearErrors, setError, formState: { errors, isValid } } = useForm<FormData>({
         mode: 'onChange'
     });
     const setPasswordForm = useForm<SetPasswordProps>({
         mode: 'onChange'
     });
+    const router = useRouter();
 
     const { mutateAsync: mutateEmail, isSuccess } = useMutation({ mutationFn: getEmail });
+    const { mutateAsync: mutateCheckEmail } = useMutation({ mutationFn: checkEmail });
     const { mutateAsync: mutateConfirmEmail } = useMutation({ mutationFn: confirmEmail });
     const { mutateAsync: mutateSetPassword } = useMutation({ mutationFn: setPassword });
 
@@ -41,7 +44,7 @@ function ForgetPassword() {
             const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
             if (emailRegex.test(value)) {
                 try {
-                    const response = await mutateEmail({ Email: value, TypeId: 1 });
+                    const response = await mutateCheckEmail({ Email: value, TypeId: 1 });
                     if (response?.Succeeded) {
                         clearErrors('email');
 
@@ -100,40 +103,44 @@ function ForgetPassword() {
 
     const setPasswordHandler = async (data: SetPasswordProps) => {
         const response = await mutateSetPassword({ Guid: signInfo.guid, Password: data.password, SecurityCode: signInfo.secorityCode, ConfirmPassword: data.confirmPassword })
-        console.log(response);
-
+        if (response?.Succeeded) {
+            router.push('/login')
+        }
     }
 
 
     return (
-        <div className='login-form'>
+        <>
             < Link href="/" >
-                <Image src="/img/logo-with-text.png" className='w-2/3 mx-auto -mt-20' width={400} height={100} alt="logo with text" />
+                <Image src="/img/new-logo-with-text.png" className='w-44 mx-auto mb-5' width={400} height={100} alt="logo with text" />
             </Link >
-            {
-                step === 1 ?
-                    <GetEmail
-                        formObject={register('email', {
-                            required: 'Invalid Email',
-                            pattern: {
-                                value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
-                                message: 'Invalid Email Format'
-                            }
-                        })}
-                        submitHandler={handleSubmit(getEmailHandler)}
-                        isValid={isValid && isSuccess}
-                        errors={errors?.email}
-                    />
-                    :
-                    step === 2 ? <ConfirmEmail otp={otp} setOtp={setOtp} secorityCode={signInfo?.secorityCode} confirmEmailHandler={confirmEmailHandler} /> :
-                        <SetPassword register={setPasswordForm.register}
-                            handleSubmit={setPasswordForm.handleSubmit}
-                            onSubmit={setPasswordHandler}
-                            watch={setPasswordForm.watch}
-                            errors={setPasswordForm.formState.errors}
-                            isValid={setPasswordForm.formState.isValid} />
-            }
-        </div>
+            <div className='login-form'>
+
+                {
+                    step === 1 ?
+                        <GetEmail
+                            formObject={register('email', {
+                                required: 'Invalid Email',
+                                pattern: {
+                                    value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+                                    message: 'Invalid Email Format'
+                                }
+                            })}
+                            submitHandler={handleSubmit(getEmailHandler)}
+                            isValid={isValid && isSuccess}
+                            errors={errors?.email}
+                        />
+                        :
+                        step === 2 ? <ConfirmEmail otp={otp} setOtp={setOtp} secorityCode={signInfo?.secorityCode} confirmEmailHandler={confirmEmailHandler} /> :
+                            <SetPassword register={setPasswordForm.register}
+                                handleSubmit={setPasswordForm.handleSubmit}
+                                onSubmit={setPasswordHandler}
+                                watch={setPasswordForm.watch}
+                                errors={setPasswordForm.formState.errors}
+                                isValid={setPasswordForm.formState.isValid} />
+                }
+            </div>
+        </>
     );
 }
 

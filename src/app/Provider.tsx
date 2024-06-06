@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "react-query";
 type Props = {
     children: React.ReactNode
 }
-
 export default function Providers({ children }: Props) {
     const [queryClient] = useState(() => new QueryClient());
 

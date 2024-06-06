@@ -19,7 +19,7 @@ function InputText({ placeholder, labelText, type, containerClass, formObject, e
     }
     return (
         <label className={`input-label ${containerClass}`}>
-            {labelText && <span>{labelText}</span>}
+            {labelText && <span className='text-gray-600 font-medium'>{labelText}</span>}
             <input type={passwordType ? 'text' : type} {...formObject} placeholder={placeholder} {...rest} />
             {type === "password" && <span onClick={changeTypeHandler} className={`absolute right-4 ${labelText ? 'top-10' : 'top-2'}`}>
                 {

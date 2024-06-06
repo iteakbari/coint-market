@@ -12,10 +12,16 @@ export function getEmail({ Email, TypeId }: getEmailProps) {
     .then(({ data }) => data);
 }
 
-export function checkEmail({
-  queryKey,
-}: QueryFunctionContext<[string, getEmailProps]>) {
-  const [, { Email, TypeId }] = queryKey;
+// export function checkEmail({
+//   queryKey,
+// }: QueryFunctionContext<[string, getEmailProps]>) {
+//   const [, { Email, TypeId }] = queryKey;
+//   return http
+//     .post("/Account/CheckEmail", { Email, TypeId })
+//     .then(({ data }) => data);
+// }
+
+export function checkEmail({ Email, TypeId }: getEmailProps) {
   return http
     .post("/Account/CheckEmail", { Email, TypeId })
     .then(({ data }) => data);
@@ -64,7 +70,7 @@ export function compeleteProfile({
       SecurityCode,
       Tags,
     })
-    .then((res) => res);
+    .then(({ data }) => data);
 }
 
 type loginProps = {
@@ -98,5 +104,5 @@ export function setPassword({
       SecurityCode,
       ConfirmPassword,
     })
-    .then((res) => res);
+    .then(({ data }) => data);
 }

@@ -8,9 +8,9 @@ export default function Header({ }: Props) {
 
 
   return (
-    <div className="flex justify-between py-4 px-3 lg:px-10">
-      <span className="w-16 h-11">
-        <Image quality={100} width={144} priority={true} height={104} src="/img/Logo.png" alt="logo" />
+    <div className="flex justify-between h-20 items-center px-3 lg:px-10 border-b sticky top-0 z-20 bg-glass">
+      <span className="w-16">
+        <Image quality={100} width={500} priority={true} height={500} src="/img/newLogo.png" alt="logo" />
       </span>
       <ul className="header-actions">
         <li className="min-w-8 min-h-8 hover:bg-slate-100 hidden lg:flex justify-center items-center rounded transition-all duration-300">

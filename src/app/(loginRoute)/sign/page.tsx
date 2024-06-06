@@ -1,15 +1,16 @@
 "use client"
-import React, { FormEvent, useCallback, useEffect, useState } from 'react'
+import React, { FormEvent, use, useCallback, useEffect, useState } from 'react'
 import GetEmail from '../../../components/Sign/GetEmail'
 import ConfirmEmail from '../../../components/Sign/ConfirmEmail';
 import { useMutation } from 'react-query';
-import { compeleteProfile, confirmEmail, getEmail } from '@/services/registerServeice';
+import { checkEmail, compeleteProfile, confirmEmail, getEmail } from '@/services/registerServeice';
 import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import CompeleteProfile from '../../../components/Sign/CompeleteProfile';
 import Link from 'next/link';
 import Image from 'next/image';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { QueryFunctionContext } from "react-query";
 
 type FormData = {
     email: string;
@@ -23,19 +24,27 @@ type CompleteProfileData = {
     tags: string[]
 }
 
+interface getEmailProps {
+    Email: string;
+    TypeId: number;
+}
+
 function Sign() {
     const [step, setStep] = useState(1);
     const [otp, setOtp] = useState('');
     const [userEmail, setUserEmail] = useState('');
     const [signInfo, setSignInfo] = useState({ guid: "", secorityCode: "" });
-    const { register, handleSubmit, watch, clearErrors, setError, setValue, formState: { errors, isValid } } = useForm<FormData>({
+    const { register, handleSubmit, watch, clearErrors, setError, formState: { errors, isValid } } = useForm<FormData>({
         mode: 'onChange'
     });
     const completeProfileForm = useForm<CompleteProfileData>({
         mode: 'onChange'
     });
 
+    const router = useRouter();
+
     const { mutateAsync: mutateEmail, isSuccess } = useMutation({ mutationFn: getEmail });
+    const { mutateAsync: mutateCheckEmail, isSuccess: Succeeded } = useMutation({ mutationFn: checkEmail });
     const { mutateAsync: mutateConfirmEmail } = useMutation({ mutationFn: confirmEmail });
     const { mutateAsync: mutateCompeleteProfile } = useMutation({ mutationFn: compeleteProfile });
 
@@ -43,12 +52,10 @@ function Sign() {
 
     useEffect(() => {
         const validateEmail = async (value: string) => {
-            console.log(value);
             const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
             if (emailRegex.test(value)) {
                 try {
-                    const response = await mutateEmail({ Email: value, TypeId: 0 });
-                    console.log(response);
+                    const response = await mutateCheckEmail({ Email: value, TypeId: 0 });
 
                     if (response?.Succeeded) {
                         clearErrors('email');
@@ -106,38 +113,44 @@ function Sign() {
 
     const completeProfileHandler = async (data: CompleteProfileData) => {
         const response = await mutateCompeleteProfile({ Guid: signInfo.guid, Email: userEmail, Password: data.password, Name: data.name, GenderId: data.gender === "male" ? 1 : data.gender === "femail" ? 2 : 3, BirthDate: data.birth, SecurityCode: otp, Tags: data.tags })
-        redirect('/');
+
+        if (response?.Succeeded) {
+            router.push('/');
+        }
     }
 
 
     return (
-        <div className={`login-form ${step === 3 && 'w-1/2'}`}>
+        <>
             < Link href="/" >
-                <Image src="/img/logo-with-text.png" className='w-56 mx-auto -mt-20' width={400} height={100} alt="logo with text" />
+                <Image src="/img/new-logo-with-text.png" className='w-44 mx-auto mb-5' width={400} height={100} alt="logo with text" />
             </Link >
-            {
-                step === 1 ?
-                    <GetEmail
-                        formObject={register('email', {
-                            required: 'Invalid Email',
-                            pattern: {
-                                value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
-                                message: 'Invalid Email Format'
-                            }
-                        })}
-                        submitHandler={handleSubmit(getEmailHandler)}
-                        isValid={isValid && isSuccess}
-                        errors={errors?.email}
-                    />
-                    :
-                    step === 2 ? <ConfirmEmail otp={otp} setOtp={setOtp} secorityCode={signInfo?.secorityCode} confirmEmailHandler={confirmEmailHandler} /> :
-                        <CompeleteProfile register={completeProfileForm.register}
-                            handleSubmit={completeProfileForm.handleSubmit}
-                            onSubmit={completeProfileHandler}
-                            errors={completeProfileForm.formState.errors}
-                            isValid={completeProfileForm.formState.isValid} />
-            }
-        </div>
+            <div className={`login-form ${step === 3 && 'w-1/2'}`}>
+
+                {
+                    step === 1 ?
+                        <GetEmail
+                            formObject={register('email', {
+                                required: 'Invalid Email',
+                                pattern: {
+                                    value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+                                    message: 'Invalid Email Format'
+                                }
+                            })}
+                            submitHandler={handleSubmit(getEmailHandler)}
+                            isValid={isValid && isSuccess || Succeeded}
+                            errors={errors?.email}
+                        />
+                        :
+                        step === 2 ? <ConfirmEmail otp={otp} setOtp={setOtp} secorityCode={signInfo?.secorityCode} confirmEmailHandler={confirmEmailHandler} /> :
+                            <CompeleteProfile register={completeProfileForm.register}
+                                handleSubmit={completeProfileForm.handleSubmit}
+                                onSubmit={completeProfileHandler}
+                                errors={completeProfileForm.formState.errors}
+                                isValid={completeProfileForm.formState.isValid} />
+                }
+            </div>
+        </>
     );
 }
 

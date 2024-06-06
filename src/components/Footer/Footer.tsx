@@ -7,7 +7,7 @@ export default function Footer({ }: Props) {
     return (
         <footer className="flex flex-col mt-auto justify-center items-center ">
             <div className="flex flex-col items-center gap-5 text-center">
-                <Image src="/img/Logo.png" className="w-32" width={200} height={100} alt="logo" />
+                <Image src="/img/newLogo.png" className="w-32" width={1000} height={1000} alt="logo" />
                 <p className="text-xl font-semibold">Coin Market Advertisement Company</p>
             </div>
             <ul className="flex gap-5 sm:gap-10 md:gap-20 lg:gap-28 pt-10 pb-6">

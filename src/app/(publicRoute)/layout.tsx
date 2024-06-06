@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import localFont from 'next/font/local'
-import "./../globals.css";
+import "../globals.css";
 import Header from "@/components/Header/Header";
 import Sidebar from "@/components/Sidebar/Sidebar";
-import Footer from "@/components/Footer/Footer";
 import Providers from "../Provider";
 import { Toaster } from "react-hot-toast";
 
@@ -46,10 +45,9 @@ export const metadata: Metadata = {
   title: "Coin Market Ads",
   description: "Coin Ads Market",
   icons: {
-    icon: "./icon.png",
+    icon: "./../icon.png",
   },
 };
-
 
 export default function RootLayout({
   children,
@@ -59,6 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.className} `}>
+        {/* <body > */}
         <Providers>
           <Toaster />
           <div className="wrapper">
@@ -66,7 +65,6 @@ export default function RootLayout({
             <div className="content">
               <Header />
               {children}
-              <Footer />
             </div>
           </div>
         </Providers>

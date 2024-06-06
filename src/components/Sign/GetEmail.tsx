@@ -19,9 +19,7 @@ function GetEmail({ submitHandler, formObject, isValid, errors }: Props) {
             <form onSubmit={submitHandler}>
                 <InputText type='email' errors={errors} formObject={formObject} placeholder='Email' className='h-12' />
                 <Button type='submit' isValid={isValid} className='btn-primary h-14 w-full my-4' text='Continue' />
-                <div className='border-b flex justify-center h-0 my-3 w-95 mx-auto'>
-                    <span className='block px-3 bg-gray text-gray-400 -mt-3 h-5 w-16 text-center'>Or</span>
-                </div>
+                <div className='or'>Or</div>
 
                 <Link href="" className='text-sm border border-gray flex items-center h-14 justify-center gap-2 rounded-xl mt-6'>
                     <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">

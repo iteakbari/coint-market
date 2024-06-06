@@ -23,33 +23,90 @@ export default function Home() {
       <div className='w-95 mx-auto'>
         <TabContent activeTabId={activeTabId} />
       </div>
-      <div className='py-10 xl:px-20 w-95 mx-auto'>
-        <Link href="">
-          <Image width={1500} height={3000} src='/img/i2.png' className='w-full' alt='Easy Steps to Earn Money' />
-        </Link>
+      <div className='py-10 xl:w-1/2 mx-auto grid grid-cols-2 gap-4'>
+        <div>
+          <Image src='/img/logoBox.png' className='w-full mb-3' width={1800} height={900} alt='' />
+          <Image src='/img/brain.png' className='w-full' width={900} height={1800} alt='' />
+        </div>
+        <div>
+          <Image src='/img/bitcoin.png' className='w-full mb-3' width={1000} height={1000} alt='' />
+          <Image src='/img/des.png' className='w-full' width={1800} height={900} alt='' />
+        </div>
       </div>
 
-      <div className='description-box'>
-        <div className='px-5 sm:px-0 sm:w-3/4 md:w-1/2 xl:w-2/5 text-center'>
-          <p className='text-2xl font-semibold mt-10 mb-7'>
-            Casting for Crypto: Unleash Your Earning Potential!
-          </p>
-          <p>
-            Welcome to Coin Market Ads, where we invite you to embark on an exciting journey through the Crypto Universe. Our platform empowers you to seek out and participate in profitable opportunities at every turn. Dive in, engage with the latest ads, and discover the potential for substantial rewards. With every cast, you&apos;re one step closer to unlocking the full spectrum of earnings in the world of crypto. Join us today, and let&apos;s cast for crypto together!
-          </p>
-        </div>
+      <div className='w-11/12 mx-auto'>
+        <p className='text-center text-5xl font-medium my-20 '>How it works?</p>
+        <div className="flex justify-center gap-14 items-start">
+          <div className='px-5 sm:px-0 sm:w-3/4 md:w-1/2 xl:w-2/6'>
+            <p className='text-2xl font-semibold my-7'>
+              Easy Steps to Earn Money
+            </p>
+            <p className='text-gray'>
+              If you are <span className='text-black'>a person</span> and you want to earn money, register and watch videos and answer to the related questions.
+            </p>
+            <div className='bg-darker-gray p-4 border rounded-xl mt-5'>
+              <p className='text-xl font-medium'>How it works</p>
+              <ul className='mt-3'>
+                <li className='mb-3'>
+                  <span className='w-8 h-8 border rounded-full inline-flex mr-3 justify-center items-center text-gray text-xl'>1</span>
+                  <span className='text-gray text-xl'>Browse and Select Ads</span>
+                </li>
+                <li className='mb-3'>
+                  <span className='w-8 h-8 border rounded-full inline-flex mr-3 justify-center items-center text-gray text-xl'>2</span>
+                  <span className='text-gray text-xl'>Register and Create an Account</span>
+                </li>
+                <li className='mb-3'>
+                  <span className='w-8 h-8 border rounded-full inline-flex mr-3 justify-center items-center text-gray text-xl'>3</span>
+                  <span className='text-gray text-xl'>Watch the Ad</span>
+                </li>
+                <li className='mb-3'>
+                  <span className='w-8 h-8 border rounded-full inline-flex mr-3 justify-center items-center text-gray text-xl'>4</span>
+                  <span className='text-gray text-xl'>Answer Questions</span>
+                </li>
+                <li className='mb-3'>
+                  <span className='w-8 h-8 border rounded-full inline-flex mr-3 justify-center items-center text-gray text-xl'>5</span>
+                  <span className='text-gray text-xl'>Earn Your Reward</span>
+                </li>
+              </ul>
+            </div>
+          </div>
 
-        <div className='px-5 sm:px-0 sm:w-3/4 md:w-1/2 xl:w-2/5 text-center'>
-          <p className='text-2xl font-semibold mt-20 mb-7'>
-            Promote Your Brand with Coin Market Ads:
-            Where Your Brand Finds its Wealth of Opportunity
-          </p>
-          <p>Imagine your brand as a treasure chest, waiting to be discovered by an eager audience. At Coin Market Ads, we provide the map to unlock the wealth of opportunities for your brand&apos;s success, all symbolized by the allure of money and coins.</p>
+          <div className='px-5 sm:px-0 sm:w-3/4 md:w-1/2 xl:w-2/6'>
+            <p className='text-2xl font-semibold my-7'>
+              PromoteYour Brand
+            </p>
+            <p className='text-gray'>If you are <span className='text-black'>a company</span>, you can register and promote your brand.</p>
+            <div className='bg-darker-gray p-4 border rounded-xl mt-5'>
+              <p className='text-xl font-medium'>How it works for promotion</p>
+              <ul className='mt-3'>
+                <li className='mb-3'>
+                  <span className='w-8 h-8 border rounded-full inline-flex mr-3 justify-center items-center text-gray text-xl'>1</span>
+                  <span className='text-gray text-xl'>Sign Up </span>
+                </li>
+                <li className='mb-3'>
+                  <span className='w-8 h-8 border rounded-full inline-flex mr-3 justify-center items-center text-gray text-xl'>2</span>
+                  <span className='text-gray text-xl'>Create and Set ad campaign</span>
+                </li>
+                <li className='mb-3'>
+                  <span className='w-8 h-8 border rounded-full inline-flex mr-3 justify-center items-center text-gray text-xl'>3</span>
+                  <span className='text-gray text-xl'>Set Rewards</span>
+                </li>
+                <li className='mb-3'>
+                  <span className='w-8 h-8 border rounded-full inline-flex mr-3 justify-center items-center text-gray text-xl'>4</span>
+                  <span className='text-gray text-xl'>Monitor Performance</span>
+                </li>
+                <li className='mb-3'>
+                  <span className='w-8 h-8 border rounded-full inline-flex mr-3 justify-center items-center text-gray text-xl'>5</span>
+                  <span className='text-gray text-xl'>Optimize and Refine</span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
 
       <div>
-        <p className='text-center text-3xl font-semibold my-20 '>Why Choose Coin Market Ads?</p>
+        <p className='text-center text-5xl font-semibold my-20 '>Why Choose Us?</p>
       </div>
       <div className='flex w-95 gap-20 mx-auto justify-around flex-wrap mb-32 mt-28'>
         <div className='why-card rounded-tl-none rounded-tr-3xl rounded-br-none rounded-bl-3xl'>

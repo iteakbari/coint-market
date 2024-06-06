@@ -12,7 +12,6 @@ type Props = {
 }
 
 function ConfirmEmail({ otp, setOtp, confirmEmailHandler, secorityCode }: Props) {
-    console.log(otp, secorityCode);
 
     return (
         <>

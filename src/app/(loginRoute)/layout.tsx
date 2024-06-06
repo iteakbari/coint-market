@@ -5,6 +5,7 @@ import Login from './login/page';
 import Footer from '@/components/Footer/Footer';
 import Providers from '../Provider';
 import { Toaster } from 'react-hot-toast';
+import SeconderyFooter from '@/components/Footer/SeconderyFooter';
 
 type Props = {
     children: React.ReactNode
@@ -54,7 +55,7 @@ function layout({ children }: Props) {
 
                     <div className='login-page'>
                         {children}
-                        <Footer />
+                        <SeconderyFooter />
                     </div>
                 </Providers>
             </body>
