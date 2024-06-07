@@ -385,6 +385,7 @@ aside.wide+.content {
     background-color: #fff;
     padding: 0 10px;
     transition: 0.3s;
+    min-width: 100px;
 }
 
 .input-label input:focus,

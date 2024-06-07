@@ -1,4 +1,8 @@
-import axios, { AxiosResponse, AxiosError } from "axios";
+import axios, {
+  AxiosResponse,
+  AxiosError,
+  InternalAxiosRequestConfig,
+} from "axios";
 
 const https = require("https");
 const agent = new https.Agent({
@@ -28,27 +32,19 @@ app.interceptors.request.use(
 );
 
 app.interceptors.response.use(
-  (response: AxiosResponse) => {
-    return response;
-  },
-  (error: AxiosError) => {
-    if (error.response) {
-      switch (error.response.status) {
-        case 401:
-          console.error("Unauthorized, redirecting to login...");
-          break;
-        case 403:
-          console.error(
-            "Forbidden, you do not have access to this resource..."
-          );
-          break;
-        default:
-          console.error(
-            `Error: ${error.response.status} - ${error.response.statusText}`
-          );
-      }
-    } else {
-      console.error("Network or Server error");
+  (response: AxiosResponse) => response,
+  async (error: AxiosError) => {
+    const originConfig = error.config as InternalAxiosRequestConfig & {
+      _retry?: boolean;
+    };
+    if (error.response?.status === 401 && !originConfig?._retry) {
+      originConfig._retry = true;
+      try {
+        const { data } = await app.get("/Account/RefreshToken", {
+          withCredentials: true,
+        });
+        if (data) return app(originConfig);
+      } catch (error) {}
     }
     return Promise.reject(error);
   }

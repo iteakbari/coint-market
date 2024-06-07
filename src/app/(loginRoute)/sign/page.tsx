@@ -33,6 +33,7 @@ function Sign() {
     const [step, setStep] = useState(1);
     const [otp, setOtp] = useState('');
     const [userEmail, setUserEmail] = useState('');
+    const [takenEmail, setTakenEmail] = useState(false);
     const [signInfo, setSignInfo] = useState({ guid: "", secorityCode: "" });
     const { register, handleSubmit, watch, clearErrors, setError, formState: { errors, isValid } } = useForm<FormData>({
         mode: 'onChange'
@@ -44,7 +45,7 @@ function Sign() {
     const router = useRouter();
 
     const { mutateAsync: mutateEmail, isSuccess } = useMutation({ mutationFn: getEmail });
-    const { mutateAsync: mutateCheckEmail, isSuccess: Succeeded } = useMutation({ mutationFn: checkEmail });
+    const { mutateAsync: mutateCheckEmail } = useMutation({ mutationFn: checkEmail });
     const { mutateAsync: mutateConfirmEmail } = useMutation({ mutationFn: confirmEmail });
     const { mutateAsync: mutateCompeleteProfile } = useMutation({ mutationFn: compeleteProfile });
 
@@ -59,8 +60,10 @@ function Sign() {
 
                     if (response?.Succeeded) {
                         clearErrors('email');
+                        setTakenEmail(true);
                     } else {
-                        setError('email', { type: 'manual', message: 'has already been token' });
+                        setTakenEmail(false);
+                        setError('email', { type: 'manual', message: 'has already been taken' });
                     }
                 } catch (error) {
                     setError('email', { type: 'manual', message: 'Server error' });
@@ -71,6 +74,8 @@ function Sign() {
             validateEmail(emailValue)
         }
     }, [emailValue, clearErrors, setError]);
+
+
 
     const getEmailHandler = async (data: FormData) => {
         const response = await mutateEmail({ Email: data.email, TypeId: 0 });
@@ -138,7 +143,7 @@ function Sign() {
                                 }
                             })}
                             submitHandler={handleSubmit(getEmailHandler)}
-                            isValid={isValid && isSuccess || Succeeded}
+                            isValid={isValid && isSuccess || takenEmail}
                             errors={errors?.email}
                         />
                         :
