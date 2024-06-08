@@ -2,17 +2,40 @@
 import Button from '@/common/Button';
 import InputText from '@/common/InputText';
 import SelectBox from '@/common/SelectBox';
+import useProfile from '@/hooks/useProfile';
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form';
 
 type Props = {}
 const MAX_FILE_SIZE = 2 * 1024 * 1024;
 const defaultImage = '/img/user-default-image.png';
 
+type ProfileData = {
+    name: string;
+    email: string;
+    birthDate: string;
+    gender: number;
+};
+
 function Profile({ }: Props) {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [preview, setPreview] = useState<string>(defaultImage);
     const [error, setError] = useState<string | null>(null);
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<ProfileData>();
+
+    const { data } = useProfile();
+
+    useEffect(() => {
+        if (data) {
+            reset({
+                name: data.name,
+                email: data.email,
+                birthDate: data.birthDate,
+                gender: data.gender,
+            });
+        }
+    }, [data, reset]);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
@@ -76,17 +99,20 @@ function Profile({ }: Props) {
                             placeholder='Name'
                             className='h-12 '
                             labelText='Name'
+                            defaultValue={data?.name}
                         />
                         <InputText
                             type='email'
                             placeholder='Email'
                             className='h-12'
                             labelText='Email'
+                            defaultValue={data?.email}
                         />
                         <InputText
                             type='date'
                             className='h-12 '
                             labelText='Birth Date'
+                            defaultValue={data?.birthDate}
                         />
 
                         <SelectBox
@@ -96,6 +122,7 @@ function Profile({ }: Props) {
                                 { id: 1, title: 'male' },
                                 { id: 2, title: 'female' }
                             ]}
+                            defaultValue={data?.gender}
                         />
                     </div>
 

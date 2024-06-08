@@ -10,7 +10,7 @@ import CompeleteProfile from '../../../components/Sign/CompeleteProfile';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { QueryFunctionContext } from "react-query";
+import Cookies from "js-cookie";
 
 type FormData = {
     email: string;
@@ -118,8 +118,14 @@ function Sign() {
 
     const completeProfileHandler = async (data: CompleteProfileData) => {
         const response = await mutateCompeleteProfile({ Guid: signInfo.guid, Email: userEmail, Password: data.password, Name: data.name, GenderId: data.gender === "male" ? 1 : data.gender === "femail" ? 2 : 3, BirthDate: data.birth, SecurityCode: otp, Tags: data.tags })
+        console.log(response);
 
         if (response?.Succeeded) {
+            const accessExpireDate = new Date(response?.Data?.AccessTokenExpiration);
+            const refreshExpireDate = new Date(response?.Data?.RefreshTokenExpiration);
+
+            Cookies.set('accessToken', response?.Data?.AccessToken, { secure: true, sameSite: 'None', expires: accessExpireDate });
+            Cookies.set('refreshToken', response?.Data?.RefreshToken, { secure: true, sameSite: 'None', expires: refreshExpireDate });
             router.push('/');
         }
     }

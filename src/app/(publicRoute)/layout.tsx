@@ -5,6 +5,7 @@ import Header from "@/components/Header/Header";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import Providers from "../Provider";
 import { Toaster } from "react-hot-toast";
+import Footer from "@/components/Footer/Footer";
 
 const outfit = localFont({
   src: [
@@ -64,7 +65,10 @@ export default function RootLayout({
             <Sidebar />
             <div className="content">
               <Header />
-              {children}
+              <div className="min-h-screen">
+                {children}
+              </div>
+              <Footer />
             </div>
           </div>
         </Providers>

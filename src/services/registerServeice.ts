@@ -1,4 +1,3 @@
-import { QueryFunctionContext } from "react-query";
 import http from "./httpService";
 
 export interface getEmailProps {
@@ -35,7 +34,7 @@ type confirmEmailProps = {
 export function confirmEmail({ Guid, SecurityCode }: confirmEmailProps) {
   return http
     .post("/Account/ConfirmRequest", { Guid, SecurityCode })
-    .then((res) => res);
+    .then(({ data }) => data);
 }
 
 interface compeleteProfileProps {
@@ -105,4 +104,8 @@ export function setPassword({
       ConfirmPassword,
     })
     .then(({ data }) => data);
+}
+
+export function logout() {
+  return http.post("/Profile/LogOut").then(({ data }) => data);
 }

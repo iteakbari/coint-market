@@ -8,9 +8,10 @@ type Props = {
     formObject?: any;
     errors?: any;
     containerClass?: string;
+    defaultValue?: string;
 } & ComponentProps<"input">
 
-function InputText({ placeholder, labelText, type, containerClass, formObject, errors, ...rest }: Props) {
+function InputText({ placeholder, labelText, defaultValue, type, containerClass, formObject, errors, ...rest }: Props) {
     // const inpRef = useRef<HTMLInputElement>(null);
     const [passwordType, setPasswordType] = useState(false);
 
@@ -18,9 +19,9 @@ function InputText({ placeholder, labelText, type, containerClass, formObject, e
         setPasswordType(() => !passwordType);
     }
     return (
-        <label className={`input-label ${containerClass}`}>
+        <label className={`input-label ${containerClass ? containerClass : ''}`}>
             {labelText && <span className='text-gray-600 font-medium'>{labelText}</span>}
-            <input type={passwordType ? 'text' : type} {...formObject} placeholder={placeholder} {...rest} />
+            <input type={passwordType ? 'text' : type} {...formObject} placeholder={placeholder} {...rest} value={defaultValue ? defaultValue : ''} />
             {type === "password" && <span onClick={changeTypeHandler} className={`absolute right-4 ${labelText ? 'top-10' : 'top-2'}`}>
                 {
                     !passwordType ? <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none">

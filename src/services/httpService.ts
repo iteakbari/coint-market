@@ -18,7 +18,7 @@ app.interceptors.request.use(
   (config) => {
     const token = document.cookie
       .split("; ")
-      .find((row) => row.startsWith("token="));
+      .find((row) => row.startsWith("accessToken="));
     if (token) {
       config.headers = config.headers || {};
       config.headers.Authorization = `Bearer ${token.split("=")[1]}`;

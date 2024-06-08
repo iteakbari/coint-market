@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
+import Cookies from "js-cookie"
+
 
 type loginProps = {
     username: string;
@@ -25,6 +27,11 @@ function Login() {
     const loginHandler = async (data: loginProps) => {
         const response = await mutateLoginHandler({ UserName: data.username, Password: data.password })
         if (response?.Succeeded) {
+            const accessExpireDate = new Date(response?.Data?.AccessTokenExpiration);
+            const refreshExpireDate = new Date(response?.Data?.RefreshTokenExpiration);
+
+            Cookies.set('accessToken', response?.Data?.AccessToken, { secure: true, sameSite: 'None', expires: accessExpireDate });
+            Cookies.set('refreshToken', response?.Data?.RefreshToken, { secure: true, sameSite: 'None', expires: refreshExpireDate });
             router.push('/');
         } else {
             setLoginError({ hasError: true, errorMessage: response?.Message });
@@ -76,7 +83,7 @@ function Login() {
                     <Button type='submit' isValid={isValid} className='btn-primary h-14 w-full my-4' text='Continue' />
                     <div className='or'>Or</div>
 
-                    <Link href="" className='text-sm border border-gray flex items-center h-14 justify-center gap-2 rounded-xl mt-6'>
+                    <Link href="https://coinmarketads.com/api/Account/ExternalLogin?id=Google" className='text-sm border border-gray flex items-center h-14 justify-center gap-2 rounded-xl mt-6'>
                         <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath="url(#clip0_1502_6242)">
                                 <path d="M23.7662 9.98557H22.7996V9.93577H11.9998V14.7357H18.7815C17.7921 17.5298 15.1335 19.5356 11.9998 19.5356C8.02366 19.5356 4.79992 16.3119 4.79992 12.3357C4.79992 8.3596 8.02366 5.13585 11.9998 5.13585C13.8352 5.13585 15.5049 5.82824 16.7763 6.95922L20.1705 3.56508C18.0273 1.56772 15.1605 0.335938 11.9998 0.335938C5.37291 0.335938 0 5.70884 0 12.3357C0 18.9626 5.37291 24.3355 11.9998 24.3355C18.6267 24.3355 23.9996 18.9626 23.9996 12.3357C23.9996 11.5311 23.9168 10.7458 23.7662 9.98557Z" fill="#FFC107" />

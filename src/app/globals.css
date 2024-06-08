@@ -150,6 +150,7 @@ aside.wide {
     position: relative;
     display: flex;
     flex-direction: column;
+    min-height: calc(100vh - 100px);
 }
 
 aside.wide+.content {

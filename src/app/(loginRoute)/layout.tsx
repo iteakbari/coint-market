@@ -46,7 +46,7 @@ const outfit = localFont({
     ]
 });
 
-function layout({ children }: Props) {
+function RegisterLayout({ children }: Props) {
     return (
         <html lang="en">
             <body className={`${outfit.className} `}>
@@ -63,4 +63,4 @@ function layout({ children }: Props) {
     )
 }
 
-export default layout
+export default RegisterLayout

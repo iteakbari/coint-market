@@ -1,16 +1,27 @@
 "use client"
+import { logout } from "@/services/registerServeice";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react"
+import { useMutation } from "react-query";
+import Cookies from "js-cookie"
 
 
 const Sidebar: React.FC = () => {
     const [wide, setWide] = useState(false);
     const pathname = usePathname();
+    const { mutateAsync: logoutFunc } = useMutation({ mutationFn: logout });
+    const token = Cookies.get('accessToken');
+
+    const logOutHandler = async () => {
+        const response = await logoutFunc();
+        Cookies.remove('accessToken');
+        Cookies.remove('refreshToken');
+    }
 
     return (
-        <aside className={`${wide && 'wide'} hidden xl:block`}>
-            <div className={`flex ${!wide && 'justify-center'} sticky top-0 bgWhite h-12 py-5 px-2`}>
+        <aside className={`${wide ? 'wide' : ''} hidden xl:block`}>
+            <div className={`flex ${!wide ? 'justify-center' : ''} sticky top-0 bgWhite h-12 py-5 px-2`}>
                 <button onClick={() => setWide(!wide)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M3 7h18M3 12h18M3 17h18" stroke="#808080" strokeWidth="1.5" strokeLinecap="round"></path></svg>
                 </button>
@@ -66,8 +77,8 @@ const Sidebar: React.FC = () => {
                         History
                     </Link>
                 </li>} */}
-                <li className={`${wide && 'border-t border-b py-3'}`}>
-                    {wide && <>
+                <li className={`${token && token !== undefined && wide ? 'border-t border-b py-3' : ''}`}>
+                    {token && token !== undefined && wide && <>
                         <span>
                             Dashboard
                         </span>
@@ -182,7 +193,7 @@ const Sidebar: React.FC = () => {
                                 </Link>
                             </li>
                             <li className="min-w-48">
-                                <Link href="/">
+                                <Link href="/" onClick={logOutHandler}>
                                     <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <g clipPath="url(#clip0_1576_14541)">
                                             <path d="M8.73438 8.89417H17.6294" stroke="#808080" strokeWidth="1.365" strokeLinecap="round" strokeLinejoin="round" />

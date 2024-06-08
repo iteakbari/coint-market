@@ -10,7 +10,7 @@ type Props = {
 
 function SelectBox({ labelText, errors, containerClass, formObject, options, ...rest }: Props) {
     return (
-        <label className={`input-label flex-1 ${containerClass}`}>
+        <label className={`input-label flex-1 ${containerClass ? containerClass : ""}`}>
             {labelText && <span className='text-gray-600 font-medium'>{labelText}</span>}
             <select {...rest} {...formObject}>
                 {options?.map(option =>

@@ -61,7 +61,7 @@ function Search({ }: Props) {
                 </ul>
             </DropdownMenu>
 
-            <div className='grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 my-10 gap-5 2xl:gap-10'>
+            <div className='grid py-2 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 my-10 gap-5 2xl:gap-10'>
                 <VideoCard />
                 <VideoCard />
                 <VideoCard />
