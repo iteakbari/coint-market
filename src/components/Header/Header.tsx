@@ -96,7 +96,7 @@ export default function Header({ }: Props) {
           </DropdownMenu>
         </li>
         <li className="min-w-8 min-h-8 hover:bg-slate-100 flex justify-center items-center rounded transition-all duration-300">
-          <span>
+          <Link href="/dashboard/profile">
             <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_1469_795)">
                 <path d="M15.4999 17.7143C18.5572 17.7143 21.0357 15.2359 21.0357 12.1786C21.0357 9.12131 18.5572 6.64288 15.4999 6.64288C12.4427 6.64288 9.96423 9.12131 9.96423 12.1786C9.96423 15.2359 12.4427 17.7143 15.4999 17.7143Z" stroke="#35393C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -109,7 +109,7 @@ export default function Header({ }: Props) {
                 </clipPath>
               </defs>
             </svg>
-          </span>
+          </Link>
         </li>
         <li className="min-w-8 min-h-8 hover:bg-slate-100 flex justify-center items-center rounded transition-all duration-300">
           <div className="searchBox">

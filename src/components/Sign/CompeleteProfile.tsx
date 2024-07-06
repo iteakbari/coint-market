@@ -95,7 +95,7 @@ function CompeleteProfile({ register, isValid, handleSubmit, errors, onSubmit }:
                     <span>{errors?.tags?.message}</span>
                 </div>
                 <div className='flex justify-end'>
-                    <Button isValid={isValid} type='submit' className='btn-primary h-14 w-60 mt-4' text='Continue' />
+                    <Button isValid={isValid} type='submit' className='btn-primary h-14 w-60 mt-4' >Continue</Button>
                 </div>
             </form>
         </>

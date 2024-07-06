@@ -14,9 +14,10 @@ const Sidebar: React.FC = () => {
     const token = Cookies.get('accessToken');
 
     const logOutHandler = async () => {
-        const response = await logoutFunc();
+        await logoutFunc();
         Cookies.remove('accessToken');
         Cookies.remove('refreshToken');
+        window.location.reload();
     }
 
     return (
@@ -100,7 +101,7 @@ const Sidebar: React.FC = () => {
                                     History
                                 </Link>
                             </li>
-                            <li className=" mb-2 min-w-48">
+                            {/* <li className=" mb-2 min-w-48">
                                 <Link href="/">
                                     <svg width="22" height="22" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <g clipPath="url(#clip0_1469_795)">
@@ -117,7 +118,7 @@ const Sidebar: React.FC = () => {
 
                                     Sign in/ Sign up
                                 </Link>
-                            </li>
+                            </li> */}
                             <li className="mb-2 min-w-48">
                                 <Link href="/dashboard/profile" className={`${pathname === '/dashboard/profile' ? 'active' : ""}`}>
                                     <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">

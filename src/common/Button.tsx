@@ -1,15 +1,15 @@
 import React, { ComponentProps } from 'react'
 
 type ButtonProps = {
-    text: string;
+    children: React.ReactNode;
     className: string;
     isValid?: boolean
 } & ComponentProps<"button">
 
-function Button({ text, className, isValid, ...rest }: ButtonProps) {
+function Button({ children, className, isValid, ...rest }: ButtonProps) {
 
     return (
-        <button className={`${className} btn ${isValid != undefined && !isValid && 'disabled-btn'}`} disabled={isValid === false && !isValid} {...rest}>{text}</button>
+        <button className={`${className} btn ${isValid != undefined && !isValid && 'disabled-btn'}`} disabled={isValid === false && !isValid} {...rest}>{children}</button>
     )
 }
 

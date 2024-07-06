@@ -80,7 +80,7 @@ function Login() {
                         </div>
                         <Link href="/forgetPassword" className='danger-link'>Forgot Password</Link>
                     </div>
-                    <Button type='submit' isValid={isValid} className='btn-primary h-14 w-full my-4' text='Continue' />
+                    <Button type='submit' isValid={isValid} className='btn-primary h-14 w-full my-4' >Continue</Button>
                     <div className='or'>Or</div>
 
                     <Link href="https://coinmarketads.com/api/Account/ExternalLogin?id=Google" className='text-sm border border-gray flex items-center h-14 justify-center gap-2 rounded-xl mt-6'>

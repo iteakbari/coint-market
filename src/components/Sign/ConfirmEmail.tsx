@@ -28,7 +28,7 @@ function ConfirmEmail({ otp, setOtp, confirmEmailHandler, secorityCode }: Props)
                     shouldAutoFocus={true}
                     renderInput={(props) => <input {...props} />}
                 />
-                <Button type='submit' isValid={otp == secorityCode} className='btn-primary h-14 w-full my-4' text='Continue' />
+                <Button type='submit' isValid={otp == secorityCode} className='btn-primary h-14 w-full my-4' >Continue</Button>
             </form>
             <div className='flex justify-center gap-3'>
                 <Link href="" className='danger-link'>Resend Code</Link>

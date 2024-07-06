@@ -1,5 +1,6 @@
 import Button from '@/common/Button'
 import InputText from '@/common/InputText'
+import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { FormEvent } from 'react'
@@ -18,7 +19,7 @@ function GetEmail({ submitHandler, formObject, isValid, errors }: Props) {
             <p className='font-semibold my-7 text-center'>Create Account</p>
             <form onSubmit={submitHandler}>
                 <InputText type='email' errors={errors} formObject={formObject} placeholder='Email' className='h-12' />
-                <Button type='submit' isValid={isValid} className='btn-primary h-14 w-full my-4' text='Continue' />
+                <Button type='submit' isValid={isValid} className='btn-primary h-14 w-full my-4' >Continue</Button>
                 <div className='or'>Or</div>
 
                 <Link href="" className='text-sm border border-gray flex items-center h-14 justify-center gap-2 rounded-xl mt-6'>
@@ -37,6 +38,8 @@ function GetEmail({ submitHandler, formObject, isValid, errors }: Props) {
                     </svg>
                     Sign in with Google
                 </Link>
+
+                <button type='button' onClick={() => signIn('google', { callbackUrl: "http://localhost:3000/" })}>google</button>
             </form>
             <div className='flex justify-center gap-1 text-sm mt-5'>
                 Do you have an account?

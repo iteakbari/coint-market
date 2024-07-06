@@ -1,9 +1,15 @@
+"use client"
 import Button from '@/common/Button'
+import usePrefrences from '@/hooks/usePreferences'
 import React from 'react'
 
 type Props = {}
 
 function Preferences({ }: Props) {
+    const { data } = usePrefrences();
+    console.log(data);
+
+
     return (
         <form>
             <div className="card">
@@ -117,7 +123,7 @@ function Preferences({ }: Props) {
                 </div>
             </div>
             <div className='flex justify-end mt-3'>
-                <Button type='submit' className='btn-primary h-14 w-60 mt-5' text='Save Change' />
+                <Button type='submit' className='btn-primary h-14 w-60 mt-5' >Save Change</Button>
             </div>
         </form>
     )

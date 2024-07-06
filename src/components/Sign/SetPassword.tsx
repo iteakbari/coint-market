@@ -52,7 +52,7 @@ function SetPassword({ register, handleSubmit, watch, errors, isValid, onSubmit 
                     validate: validateConfirmPassword,
                 })} type='password' placeholder='Password' className='h-12' />
 
-                <Button type='submit' isValid={isValid} className='btn-primary h-14 w-full my-4' text='Continue' />
+                <Button type='submit' isValid={isValid} className='btn-primary h-14 w-full my-4' >Continue</Button>
 
             </form>
         </>

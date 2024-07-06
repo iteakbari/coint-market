@@ -65,10 +65,10 @@ export default function RootLayout({
             <Sidebar />
             <div className="content">
               <Header />
-              <div className="min-h-screen">
+              <div className="min-h-full-page flex flex-col">
                 {children}
               </div>
-              <Footer />
+              {/* <Footer /> */}
             </div>
           </div>
         </Providers>

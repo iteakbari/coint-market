@@ -13,7 +13,7 @@ function Feedback({ }: Props) {
                 <InputText placeholder='Name*' className='h-12' />
                 <InputText placeholder='Email*' className='h-12' />
                 <Textarea placeholder='Your message...' />
-                <Button type='submit' text='Send Message' className='btn-primary w-full py-3' />
+                <Button type='submit' className='btn-primary w-full py-3' >Send Message</Button>
             </form>
         </div>
     )

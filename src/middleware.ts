@@ -11,7 +11,7 @@ export async function middleware(req: NextRequest) {
   const referer = req.headers.get("referer");
 
   if (!token || token === undefined) {
-    if (pathname.startsWith("/dashboard") || pathname.startsWith("/purchase")) {
+    if (pathname.startsWith("/dashboard")) {
       return NextResponse.redirect(new URL("/unauthorised", url));
     }
   } else if (token) {
@@ -20,8 +20,6 @@ export async function middleware(req: NextRequest) {
       pathname.startsWith("/login") ||
       pathname.startsWith("/forgetPassword")
     ) {
-      console.log(referer);
-
       const redirectUrl = referer ? new URL(referer) : new URL("/", req.url);
       return NextResponse.redirect(redirectUrl);
     }

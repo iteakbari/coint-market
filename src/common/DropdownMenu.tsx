@@ -1,13 +1,6 @@
 "use client"
+import { DropdownMenuProps } from "@/types/type";
 import React, { useState, useEffect, useRef, forwardRef, ReactNode } from "react";
-
-interface DropdownMenuProps {
-  children: ReactNode;
-  trigger: ReactNode;
-  customeClass: string;
-  direction: string,
-  menuClass?: string
-}
 
 const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
   ({ children, trigger, customeClass, direction, menuClass }, ref) => {

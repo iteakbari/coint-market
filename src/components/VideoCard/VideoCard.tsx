@@ -1,48 +1,58 @@
+import DropdownMenu from '@/common/DropdownMenu'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
-type Props = {}
+type VideoCardProps = {
+    className?: string
+}
 
-function VideoCard({ }: Props) {
+function VideoCard({ className }: VideoCardProps) {
     return (
-        <div className='bg-vanilla-white rounded-xl box-shadow p-4 hover:-translate-y-1 hover:shadow-md transition-all duration-300'>
-            <div className='relative pb-7'>
-                <Image src='/img/i1.png' className='w-full xl:h-44 object-cover rounded-lg' width={200} height={100} alt='video poster' />
-                <div className='absolute right-2 bottom-9 w-max gap-2 flex'>
-                    <small className='text-white border px-1 py-[1px] rounded flex items-center'>
-                        <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4.51085 6.51147L1.29622 9.622C1.20236 9.71293 1.12786 9.82111 1.07702 9.94031C1.02618 10.0595 1 10.1874 1 10.3165C1 10.4456 1.02618 10.5735 1.07702 10.6927C1.12786 10.8119 1.20236 10.92 1.29622 11.011L3.41928 13.0847C3.51238 13.1763 3.62314 13.2491 3.74517 13.2988C3.86721 13.3484 3.9981 13.374 4.1303 13.374C4.2625 13.374 4.3934 13.3484 4.51543 13.2988C4.63747 13.2491 4.74823 13.1763 4.84132 13.0847L8.02591 9.94479" stroke="#EEF8FF" strokeWidth="0.914359" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M10.519 7.50948L13.7035 4.39896C13.7974 4.30803 13.8719 4.19985 13.9228 4.08065C13.9736 3.96145 13.9998 3.8336 13.9998 3.70448C13.9998 3.57535 13.9736 3.4475 13.9228 3.3283C13.8719 3.20911 13.7974 3.10092 13.7035 3.00999L11.6105 0.936308C11.5174 0.844628 11.4067 0.771859 11.2846 0.722199C11.1626 0.67254 11.0317 0.646973 10.8995 0.646973C10.7673 0.646973 10.6364 0.67254 10.5144 0.722199C10.3923 0.771859 10.2816 0.844628 10.1885 0.936308L7.00391 4.07617" stroke="#EEF8FF" strokeWidth="0.914359" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M9.51797 5.05444L5.51221 8.96705" stroke="#EEF8FF" strokeWidth="0.914359" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                    </small>
-                    <small className='text-white border px-1 py-[1px] rounded'>2:23</small>
-                </div>
-                <div className='absolute bottom-0 flex gap-3 items-end justify-between w-full'>
-                    <div className='flex items-end gap-3'>
-                        <Image src='/img/videoBadge.png' className='size-14' width={80} height={80} alt='badge' />
-                        <p className='text-xs pb-1'>Advertiser: Shopify Company</p>
+        <div className={`${className} bg-vanilla-white rounded-xl box-shadow hover:-translate-y-1 hover:shadow-md transition-all duration-300`}>
+            <div className='relative'>
+                <Image src='/img/cbg.png' className='w-full xl:h-[350px] object-cover rounded-lg' width={200} height={100} alt='video poster' />
+
+                <div className='absolute overlay inset-0 rounded-xl z-10 p-5 text-white flex flex-col justify-between'>
+                    <div>
+                        <h2 className='text-lg mb-5'>Black Opium Eau de Parfum</h2>
+                        <p className='mb-5 text-gray-100 text-sm'>Black Opium, a top-rated YSL perfume with intoxicating notes of rich coffee beans, sweet vanilla, and white flowers to create a long-lasting fragrance.</p>
+                        <div className='flex gap-5 text-xs'>
+                            <span>Question: <span>7</span></span>
+                            <span>Reward: <span>0.0005 Shiba</span></span>
+                        </div>
                     </div>
-                    <span className='pb-2'>
-                        <svg width="14" height="3" viewBox="0 0 14 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.95902 2.82696C1.57502 2.82696 1.25702 2.70096 1.00502 2.44896C0.76502 2.18496 0.64502 1.86696 0.64502 1.49496C0.64502 1.11096 0.76502 0.792964 1.00502 0.540964C1.25702 0.288964 1.57502 0.162964 1.95902 0.162964C2.34302 0.162964 2.65502 0.288964 2.89502 0.540964C3.14702 0.792964 3.27302 1.11096 3.27302 1.49496C3.27302 1.86696 3.14702 2.18496 2.89502 2.44896C2.65502 2.70096 2.34302 2.82696 1.95902 2.82696Z" fill="#35393C" />
-                            <path d="M6.99972 2.82696C6.61572 2.82696 6.29772 2.70096 6.04572 2.44896C5.80572 2.18496 5.68572 1.86696 5.68572 1.49496C5.68572 1.11096 5.80572 0.792964 6.04572 0.540964C6.29772 0.288964 6.61572 0.162964 6.99972 0.162964C7.38372 0.162964 7.69572 0.288964 7.93572 0.540964C8.18772 0.792964 8.31372 1.11096 8.31372 1.49496C8.31372 1.86696 8.18772 2.18496 7.93572 2.44896C7.69572 2.70096 7.38372 2.82696 6.99972 2.82696Z" fill="#35393C" />
-                            <path d="M12.0404 2.82696C11.6564 2.82696 11.3384 2.70096 11.0864 2.44896C10.8464 2.18496 10.7264 1.86696 10.7264 1.49496C10.7264 1.11096 10.8464 0.792964 11.0864 0.540964C11.3384 0.288964 11.6564 0.162964 12.0404 0.162964C12.4244 0.162964 12.7364 0.288964 12.9764 0.540964C13.2284 0.792964 13.3544 1.11096 13.3544 1.49496C13.3544 1.86696 13.2284 2.18496 12.9764 2.44896C12.7364 2.70096 12.4244 2.82696 12.0404 2.82696Z" fill="#35393C" />
-                        </svg>
-                    </span>
+
+                    <div className='w-full gap-2 flex justify-between'>
+                        <div className='flex gap-3'>
+                            <Link href='' className='flex w-10 h-10 bg-white justify-center items-center rounded-full'>
+                                <svg width="25" height="25" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_3769_14178)">
+                                        <path d="M19.8689 15.3162C19.8689 16.5234 19.3894 17.6811 18.5358 18.5347C17.6822 19.3883 16.5245 19.8678 15.3173 19.8678C14.1101 19.8678 12.9524 19.3883 12.0988 18.5347C11.2452 17.6811 10.7656 16.5234 10.7656 15.3162C10.7656 14.109 11.2452 12.9513 12.0988 12.0977C12.9524 11.2441 14.1101 10.7645 15.3173 10.7645C16.5245 10.7645 17.6822 11.2441 18.5358 12.0977C19.3894 12.9513 19.8689 14.109 19.8689 15.3162Z" fill="#35393C" />
+                                        <path d="M0.749023 15.3158C0.749023 15.3158 6.21101 5.30212 15.3143 5.30212C24.4176 5.30212 29.8796 15.3158 29.8796 15.3158C29.8796 15.3158 24.4176 25.3294 15.3143 25.3294C6.21101 25.3294 0.749023 15.3158 0.749023 15.3158ZM15.3143 21.6881C17.0044 21.6881 18.6252 21.0167 19.8202 19.8217C21.0153 18.6266 21.6866 17.0058 21.6866 15.3158C21.6866 13.6257 21.0153 12.0049 19.8202 10.8099C18.6252 9.61482 17.0044 8.94345 15.3143 8.94345C13.6243 8.94345 12.0035 9.61482 10.8084 10.8099C9.61337 12.0049 8.94201 13.6257 8.94201 15.3158C8.94201 17.0058 9.61337 18.6266 10.8084 19.8217C12.0035 21.0167 13.6243 21.6881 15.3143 21.6881Z" fill="#35393C" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_3769_14178">
+                                            <rect width="29.1306" height="29.1306" fill="white" transform="translate(0.750977 0.75061)" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </Link>
+
+                            <Link href='' className='flex w-10 h-10 bg-white justify-center items-center rounded-full'>
+                                <svg width="25" height="25" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M20.4938 4.02087C19.0505 4.02087 17.6663 4.59422 16.6457 5.61479L10.2276 12.0329C7.27989 14.9806 5.18871 18.6741 4.17765 22.7183L3.86753 23.9588C3.54588 25.2454 4.71127 26.4108 5.99785 26.0891L7.23834 25.779C11.2826 24.7679 14.976 22.6768 17.9237 19.729L24.3419 13.3109C25.3624 12.2903 25.9358 10.9061 25.9358 9.46285C25.9358 6.45733 23.4993 4.02087 20.4938 4.02087ZM18.6493 11.3073C19.6318 12.2898 20.7707 12.7083 21.6155 12.5612L22.6039 11.5729C23.1635 11.0133 23.4779 10.2543 23.4779 9.46285C23.4779 7.81479 22.1419 6.47878 20.4938 6.47878C19.7024 6.47878 18.9434 6.79317 18.3837 7.3528L17.3954 8.34112C17.2484 9.18593 17.6669 10.3249 18.6493 11.3073Z" fill="#35393C" />
+                                </svg>
+                            </Link>
+                        </div>
+                        <div className='flex gap-4 items-center'>
+                            <small className='text-white px-1 py-[1px] rounded bg-glass2'>2:23</small>
+                            <DropdownMenu direction="right-0 top-full" customeClass='w-6' trigger={<span className='more w-max'><span></span><span></span><span></span></span>}>
+                                <div className='p-5 bg-white'></div>
+                            </DropdownMenu>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div className='py-3 border-b'>
-                <h2 className='font-semibold'>Shop with shopify</h2>
-                <p className='text-xs'>Explore our shopping store.</p>
-            </div>
-            <div className='flex justify-between text-gray text-xs py-2'>
-                <span>Questions</span>
-                <span>5</span>
-            </div>
-            <div className='flex justify-between text-gray text-xs py-1'>
-                <span>Reward</span>
-                <span>0.005 <span>Eth</span>($<span>5</span>) </span>
             </div>
         </div>
     )

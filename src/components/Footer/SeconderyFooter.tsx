@@ -5,7 +5,7 @@ type Props = {}
 
 function SeconderyFooter({ }: Props) {
     return (
-        <div className='flex justify-between items-center py-10 mt-auto mx-auto w-4/5'>
+        <div className='flex justify-between items-center py-10 mx-auto w-4/5 mt-auto'>
             <p className='text-gray'>2024 © Coin Market Advertisement Company</p>
             <div className='inline-flex gap-10'>
                 <Link href='/about'>About</Link>

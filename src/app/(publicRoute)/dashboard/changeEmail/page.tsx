@@ -5,6 +5,7 @@ import React from 'react'
 type Props = {}
 
 function ChangeEmail({ }: Props) {
+
     return (
         <form>
             <div className="card">
@@ -17,7 +18,7 @@ function ChangeEmail({ }: Props) {
                 </div>
             </div>
             <div className='flex justify-end mt-3'>
-                <Button type='submit' className='btn-primary h-14 w-60 mt-5' text='Send Verification Code' />
+                <Button type='submit' className='btn-primary h-14 w-60 mt-5' >Send Verification Code</Button>
             </div>
         </form>
     )
