@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React, { ReactNode, SetStateAction } from "react";
 
 export type changePasswordProps = {
   OldPassword: string;
@@ -102,4 +102,27 @@ export type Gender = {
 
 export interface MyTimerProps {
   expiryTimestamp: Date;
+}
+
+export interface AdSet {
+  Id: number;
+  Guid: string;
+  CampaignGuid: string;
+  CampaignName: string;
+  Title: string;
+  Budget: number;
+  DigitalCurrencyLogo: string;
+  DigitalCurrencyTitle: string;
+  PerAnswered: number;
+  EmailNotificationTypeId: number;
+  StartDate: string;
+  StartTime: string;
+  EndDate: string;
+  EndTime: string;
+  Genders: [];
+  GenderTags: [];
+  Locations: [];
+  LocationTags: [];
+  AgeGroups: [];
+  AgeGroupTags: [];
 }

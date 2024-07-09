@@ -1,4 +1,5 @@
 'use client'
+import Button from '@/common/Button';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react'
@@ -8,7 +9,7 @@ type Props = {}
 function Card({ }: Props) {
     const [showMore, setShowMore] = useState(false);
     return (
-        <div className='bg-white rounded-[15px] relative pb-14'>
+        <div className='bg-white rounded-[15px] h-max relative pb-14 shadow'>
             <div className='p-10 pb-3'>
                 <Image src='/img/cbg.png' className='rounded-[15px]' width={1000} height={1000} alt='' />
                 <h2 className='text-lg font-semibold mt-7 mb-3'>Black Opium Eau de Parfum</h2>
@@ -68,6 +69,11 @@ function Card({ }: Props) {
                     <div className="pie" style={{ backgroundImage: `conic-gradient(#35393C ${60}%,#fff ${100 - 60}%)` }}>
                         <div>60%</div>
                     </div>
+                </div>
+
+                <div className='px-10 flex gap-10 pb-7 pt-5'>
+                    <Link href='' className='h-12 btn btn-default w-1/2'>Edit</Link>
+                    <Button className='h-12 btn-default w-1/2'>Delete</Button>
                 </div>
             </div>
 

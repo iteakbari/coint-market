@@ -24,7 +24,7 @@ function InputText({ placeholder, labelText, badge, defaultValue, type, containe
         <label className={`input-label ${containerClass ? containerClass : ''}`}>
             {labelText && <span className='text-gray-600 font-medium'>{labelText}</span>}
             <input type={passwordType ? 'text' : type} {...formObject} placeholder={placeholder} {...rest} value={defaultValue} />
-            {type === "password" && <span onClick={changeTypeHandler} className={`absolute right-4 ${labelText ? 'top-10' : 'top-2'}`}>
+            {type === "password" && <span onClick={changeTypeHandler} className={`absolute right-4 ${labelText ? 'top-[50%]' : 'top-[25%]'}`}>
                 {
                     !passwordType ? <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none">
                         <path d="M15.58 12c0 1.98-1.6 3.58-3.58 3.58S8.42 13.98 8.42 12s1.6-3.58 3.58-3.58 3.58 1.6 3.58 3.58Z" stroke="#35393c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
@@ -36,7 +36,7 @@ function InputText({ placeholder, labelText, badge, defaultValue, type, containe
                     </svg>
                 }
             </span>}
-            {badge && <span className={`absolute right-4 text-gray ${labelText ? 'top-10' : 'top-3'}`}>{badge}</span>}
+            {badge && <span className={`absolute right-4 text-gray ${labelText ? 'top-[50%]' : 'top-[25%]'}`}>{badge}</span>}
             {errors && <span className='text-error text-xs'>{errors?.message}</span>}
         </label>
     )

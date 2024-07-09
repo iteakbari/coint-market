@@ -2,8 +2,6 @@ import Button from '@/common/Button'
 import InputText from '@/common/InputText'
 import SelectBox from '@/common/SelectBox'
 import useTage from '@/hooks/useTage'
-import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
 import { UseFormRegister, FieldErrors, SubmitHandler, UseFormHandleSubmit } from 'react-hook-form'
 
